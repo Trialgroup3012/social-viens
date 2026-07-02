@@ -1,0 +1,132 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                                                                          ║
+║          🎉  SOCIAL VIENS — COMPLETE PROJECT (READY TO RUN)              ║
+║                                                                          ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+Hi! This zip contains the COMPLETE source code of the Social Viens website.
+Follow these 6 steps and you'll have it running in ~5 minutes.
+
+
+┌────────────────────────────────────────────────────────────────────────┐
+│  PREREQUISITES (install once)                                          │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│  1. Node.js 20 LTS  →  https://nodejs.org/                             │
+│  2. Bun             →  https://bun.sh/    (run: curl -fsSL https://bun.sh/install | bash)  │
+│  3. Git             →  https://git-scm.com/downloads                   │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────┐
+│  SETUP STEPS                                                           │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│  Step 1: Unzip this file                                               │
+│  ------------------------------------------------------------------    │
+│    Right-click → "Extract All" (Windows)                               │
+│    or double-click (Mac)                                               │
+│    or run:  unzip social-viens-complete.zip -d social-viens            │
+│                                                                        │
+│  Step 2: Open a terminal INSIDE the unzipped folder                    │
+│  ------------------------------------------------------------------    │
+│    Windows:  Shift + Right-click in the folder → "Open PowerShell"     │
+│    Mac:     Terminal → cd ~/Downloads/social-viens                     │
+│                                                                        │
+│  Step 3: Install dependencies (1-2 minutes)                            │
+│  ------------------------------------------------------------------    │
+│    bun install                                                         │
+│                                                                        │
+│  Step 4: Create your .env file                                         │
+│  ------------------------------------------------------------------    │
+│    cp .env.example .env        (Mac/Linux)                             │
+│    copy .env.example .env      (Windows)                               │
+│                                                                        │
+│    → The default DATABASE_URL already works for local dev.             │
+│    → You don't need to edit anything else to get started.              │
+│                                                                        │
+│  Step 5: Create the database                                           │
+│  ------------------------------------------------------------------    │
+│    bun run db:push                                                     │
+│                                                                        │
+│  Step 6: Start the dev server 🚀                                       │
+│  ------------------------------------------------------------------    │
+│    bun run dev                                                         │
+│                                                                        │
+│    Then open your browser to:  http://localhost:3000                   │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────┐
+│  OPTIONAL: Seed demo content (blog, portfolio, admin user)             │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│  While the dev server is running, open this URL in your browser:       │
+│                                                                        │
+│    http://localhost:3000/api/seed                                      │
+│                                                                        │
+│  You'll see JSON confirming demo data was added.                       │
+│  Then log into the admin panel:                                        │
+│                                                                        │
+│    URL:      http://localhost:3000/admin/login                         │
+│    Email:    admin@socialviens.com                                     │
+│    Password: admin123                                                  │
+│                                                                        │
+│  ⚠️  Change this password before going live!                           │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────┐
+│  DEPLOY TO VERCEL                                                      │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│  1. Push this folder to a GitHub repo                                  │
+│  2. Go to https://vercel.com/new                                       │
+│  3. Import the repo — Vercel auto-detects Next.js                      │
+│  4. Add env var:  DATABASE_URL = file:./db/custom.db                   │
+│     (or use a real Postgres URL — see SETUP.md section 10)             │
+│  5. Click Deploy ✨                                                    │
+│                                                                        │
+│  Read SETUP.md for the full guide (beginner-friendly, 12 sections).    │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────┐
+│  WHAT'S IN THIS ZIP?                                                   │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│  ✓ src/              → All source code (30 sections, 35 API routes,    │
+│                        56 pages, UI components, lib utilities)         │
+│  ✓ prisma/           → Database schema                                 │
+│  ✓ public/           → All images (hero, portfolio, team, blog, etc.)  │
+│  ✓ examples/         → WebSocket demo                                  │
+│  ✓ package.json      → Dependencies + scripts                          │
+│  ✓ bun.lock          → Lockfile for reproducible installs              │
+│  ✓ vercel.json       → Vercel deployment config                        │
+│  ✓ .env.example      → Environment variable template                   │
+│  ✓ next.config.ts, tsconfig.json, tailwind.config.ts, etc.             │
+│  ✓ README.md         → Project overview                                │
+│  ✓ SETUP.md          → Full beginner setup guide                       │
+│                                                                        │
+│  ✗ node_modules      → NOT included (run `bun install` to regenerate)  │
+│  ✗ .next             → NOT included (build output, auto-generated)     │
+│  ✗ db/custom.db      → NOT included (run `bun run db:push` to create)  │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────┐
+│  PROBLEMS?                                                             │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│  Read the "Common problems & fixes" section in SETUP.md — it covers    │
+│  the 9 most common issues (port conflicts, prisma errors, etc.)        │
+│                                                                        │
+└────────────────────────────────────────────────────────────────────────┘
+
+
+Happy coding! 🚀  — Social Viens team

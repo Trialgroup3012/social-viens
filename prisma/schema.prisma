@@ -1,0 +1,235 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  business  String?
+  service   String?
+  message   String?
+  source    String   @default("website")
+  pageUrl   String?
+  notes     String?
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PageContent {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  content         String
+  metaTitle       String?
+  metaDescription String?
+  status          String   @default("published")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model BlogPost {
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique
+  excerpt        String?
+  content        String
+  category       String
+  tags           String?  // JSON-encoded string[] (SQLite has no array type)
+  author         String?
+  authorRole     String?
+  authorBio      String?
+  publishedAt    DateTime?
+  readTime       String   @default("5 min read")
+  featuredImage  String?
+  featured       Boolean  @default(false)
+  status         String   @default("published")
+  metaTitle      String?
+  metaDescription String?
+  ogImage        String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String?
+  company   String?
+  business  String?
+  industry  String
+  quote     String?
+  text      String?
+  rating    Int      @default(5)
+  result    String?
+  results   String?
+  avatar    String?
+  image     String?
+  featured  Boolean  @default(false)
+  hasVideo  Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id                String   @id @default(cuid())
+  title             String
+  slug              String   @unique
+  description       String
+  shortDescription  String?
+  longDescription   String?
+  icon              String
+  benefits          String   // JSON-encoded string[]
+  results           String
+  startingPrice     String?
+  popular           Boolean  @default(false)
+  features          String?  // JSON-encoded ServiceFeature[]
+  process           String?  // JSON-encoded ServiceProcessStep[]
+  faqs              String?  // JSON-encoded ServiceFAQ[]
+  order             Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Portfolio {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  client      String
+  category    String
+  services    String?  // JSON-encoded string[]
+  description String
+  results     String?
+  image       String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PricingPackage {
+  id          String   @id @default(cuid())
+  name        String
+  price       Int
+  period      String
+  description String
+  features    String   // JSON-encoded string[]
+  highlighted Boolean  @default(false)
+  ctaText     String
+  ctaLink     String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CaseStudy {
+  id              String   @id @default(cuid())
+  client          String
+  industry        String
+  title           String
+  description     String?
+  beforeLeads     Int?
+  afterLeads      Int?
+  beforeTraffic   String?
+  afterTraffic    String?
+  beforeRanking   String?
+  afterRanking    String?
+  beforeConversion String?
+  afterConversion  String?
+  revenueImpact   String?
+  featured        Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String?
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?   @default("Newsletter Subscriber")
+  source    String   @default("website")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Admin notifications for new leads, chat conversations, etc.
+model Notification {
+  id         String   @id @default(cuid())
+  type       String   // "lead" | "chat" | "newsletter" | "report"
+  title      String
+  message    String
+  // JSON-encoded extra data: { leadName, leadEmail, leadPhone, source, waLink, ... }
+  metadata   String?
+  // "unread" | "read" | "archived"
+  status     String   @default("unread")
+  // Link to the relevant admin page (e.g. "/admin/leads", "/admin/chat")
+  actionUrl  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+// AI Chatbot conversation sessions
+model ChatSession {
+  id         String   @id @default(cuid())
+  // Anonymous session ID from the frontend (UUID generated in browser)
+  sessionId  String   @unique
+  // Snapshot of visitor info if/when captured
+  visitorIp  String?
+  userAgent  String?
+  // Counts
+  messageCount Int    @default(0)
+  // Lead linkage: if the chat visitor also filled a form, link them
+  leadId     String?
+  // Status: "active" | "ended" | "converted"
+  status     String   @default("active")
+  // First message preview (for the admin list view)
+  firstMessage String?
+  lastMessage  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  messages   ChatMessage[]
+}
+
+// Individual messages within a chat session
+model ChatMessage {
+  id        String   @id @default(cuid())
+  session   ChatSession @relation(fields: [sessionId], references: [sessionId], onDelete: Cascade)
+  sessionId String
+  // "user" | "assistant" | "system"
+  role      String
+  content   String
+  // Token/usage info (optional)
+  tokens    Int?
+  createdAt DateTime @default(now())
+
+  @@index([sessionId])
+}
