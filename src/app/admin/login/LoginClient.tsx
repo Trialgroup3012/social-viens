@@ -3,11 +3,18 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowRight, Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
+import {
+  ArrowRight,
+  Eye,
+  EyeOff,
+  Loader2,
+  Lock,
+  Mail,
+  ShieldCheck,
+} from "lucide-react";
 
 const ADMIN_TOKEN_KEY = "admin_token";
 const ADMIN_USER_KEY = "admin_user";
@@ -24,8 +31,8 @@ export default function LoginClient() {
     getClientSnapshot,
     getServerSnapshot
   );
-  const [email, setEmail] = useState("admin@socialviens.com");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -73,127 +80,158 @@ export default function LoginClient() {
   }
 
   return (
-    <div className="admin-light min-h-screen bg-background flex flex-col items-center justify-center px-4 py-10">
-      {/* Logo / brand */}
-      <div className="text-center mb-8">
-        <Link href="/" className="inline-block">
-          <span className="font-sans text-2xl font-black tracking-tight text-foreground">
-            SOCIAL <span className="text-[#D4AF37]">VIENS</span>
-          </span>
-        </Link>
-        <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mt-1.5">
-          Admin Console
-        </p>
-      </div>
+    <div className="admin-light min-h-screen bg-[#f6f3ee] px-4 py-4 text-[#2b2b32] sm:px-6 sm:py-6 lg:flex lg:items-center lg:justify-center lg:p-8">
+      <main className="mx-auto grid w-full max-w-5xl overflow-hidden rounded-2xl border border-black/[0.08] bg-white shadow-[0_24px_70px_rgba(43,32,22,0.12)] lg:min-h-[640px] lg:grid-cols-[0.92fr_1.08fr]">
+        <section className="relative hidden flex-col justify-between overflow-hidden bg-[#211719] p-10 text-[#f8f4ed] lg:flex">
+          <div className="absolute inset-x-0 top-0 h-1 bg-[#d4af37]" aria-hidden="true" />
 
-      <Card className="w-full max-w-md shadow-md border-border bg-card">
-        <CardHeader className="space-y-1.5 pb-2">
-          <CardTitle className="text-2xl font-bold text-foreground">
-            Sign in
-          </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Enter your credentials to access the dashboard.
-          </p>
-        </CardHeader>
+          <Link
+            href="/"
+            className="inline-flex w-fit items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5d680] focus-visible:ring-offset-4 focus-visible:ring-offset-[#211719]"
+          >
+            <span className="font-sans text-xl font-black tracking-[-0.04em]">
+              SOCIAL <span className="text-[#f5d680]">VIENS</span>
+            </span>
+          </Link>
 
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-            <div className="space-y-1.5">
-              <Label htmlFor="email" className="text-foreground text-sm font-medium">
-                Email
-              </Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
-                <Input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@socialviens.com"
-                  className="pl-9 bg-background text-foreground border-border"
-                  disabled={loading}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="password" className="text-foreground text-sm font-medium">
-                Password
-              </Label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="pl-9 pr-9 bg-background text-foreground border-border"
-                  disabled={loading}
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-muted-foreground hover:text-foreground rounded transition-colors"
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  tabIndex={-1}
-                >
-                  {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                </button>
-              </div>
-            </div>
-
-            {error && (
-              <div
-                role="alert"
-                className="text-sm text-destructive bg-destructive/10 border border-destructive/30 rounded-md px-3 py-2"
-              >
-                {error}
-              </div>
-            )}
-
-            <Button
-              type="submit"
-              disabled={loading || !mounted}
-              className="w-full bg-[#D4AF37] text-[#0F0A0C] hover:bg-[#B8860B] font-semibold h-10"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="size-4 animate-spin" />
-                  Signing in…
-                </>
-              ) : (
-                <>
-                  Sign In
-                  <ArrowRight className="size-4" />
-                </>
-              )}
-            </Button>
-          </form>
-
-          <div className="mt-5 pt-4 border-t border-border">
-            <p className="text-xs text-muted-foreground text-center">
-              <span className="font-medium text-foreground/80">Demo credentials:</span>{" "}
-              <code className="px-1.5 py-0.5 rounded bg-muted text-foreground font-mono text-[11px]">
-                admin@socialviens.com
-              </code>{" "}
-              /{" "}
-              <code className="px-1.5 py-0.5 rounded bg-muted text-foreground font-mono text-[11px]">
-                admin123
-              </code>
+          <div className="max-w-sm">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#f5d680]">
+              Admin workspace
+            </p>
+            <h1 className="text-balance text-4xl font-bold leading-[1.08] tracking-[-0.04em]">
+              Your team&apos;s command centre.
+            </h1>
+            <p className="mt-5 max-w-xs text-base leading-7 text-[#d9d1c7]">
+              Manage leads, services and site content from one protected workspace.
             </p>
           </div>
-        </CardContent>
-      </Card>
 
-      <p className="text-xs text-muted-foreground mt-6 text-center max-w-sm">
-        Authorized personnel only. By signing in you acknowledge that all actions
-        are logged.
-      </p>
+          <div className="flex items-center gap-3 border-t border-white/15 pt-6 text-sm text-[#d9d1c7]">
+            <ShieldCheck className="size-5 shrink-0 text-[#f5d680]" aria-hidden="true" />
+            <span>Private access for authorised team members.</span>
+          </div>
+        </section>
+
+        <section className="flex min-h-[calc(100vh-2rem)] flex-col px-6 py-7 sm:min-h-[calc(100vh-3rem)] sm:px-10 sm:py-10 lg:min-h-0 lg:px-14 lg:py-12">
+          <div className="flex items-center justify-between gap-4">
+            <Link
+              href="/"
+              className="font-sans text-lg font-black tracking-[-0.04em] text-[#2b2b32] transition-colors hover:text-[#8e7013] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37] focus-visible:ring-offset-4 lg:hidden"
+            >
+              SOCIAL <span className="text-[#b8860b]">VIENS</span>
+            </Link>
+            <span className="hidden lg:block" aria-hidden="true" />
+            <Link
+              href="/"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-[#655c55] transition-colors hover:text-[#2b2b32] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37] focus-visible:ring-offset-4"
+            >
+              Back to website
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="my-auto w-full max-w-md py-12 lg:py-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8e7013]">
+              Secure sign in
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-[-0.04em] text-[#2b2b32] sm:text-[2.15rem]">
+              Welcome back
+            </h2>
+            <p className="mt-3 text-base leading-7 text-[#655c55]">
+              Use your authorised account to open the admin dashboard.
+            </p>
+
+            <form onSubmit={handleSubmit} className="mt-9 space-y-5" noValidate>
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-semibold text-[#2b2b32]">
+                  Email address
+                </Label>
+                <div className="relative">
+                  <Mail
+                    className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-[#726a63]"
+                    aria-hidden="true"
+                  />
+                  <Input
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@company.com"
+                    className="h-12 border-black/15 bg-white pl-11 text-base text-[#2b2b32] shadow-none placeholder:text-[#8a8179] focus-visible:border-[#b8860b] focus-visible:ring-[#d4af37]/30"
+                    disabled={loading}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-sm font-semibold text-[#2b2b32]">
+                  Password
+                </Label>
+                <div className="relative">
+                  <Lock
+                    className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-[#726a63]"
+                    aria-hidden="true"
+                  />
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
+                    className="h-12 border-black/15 bg-white pl-11 pr-12 text-base text-[#2b2b32] shadow-none placeholder:text-[#8a8179] focus-visible:border-[#b8860b] focus-visible:ring-[#d4af37]/30"
+                    disabled={loading}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((v) => !v)}
+                    className="absolute right-2 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-md text-[#726a63] transition-colors hover:bg-[#f5f0e8] hover:text-[#2b2b32] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37]"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-pressed={showPassword}
+                  >
+                    {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {error && (
+                <div
+                  role="alert"
+                  className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm font-medium text-destructive"
+                >
+                  {error}
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                disabled={loading || !mounted}
+                className="h-12 w-full bg-[#d4af37] text-base font-bold text-[#201719] shadow-none transition-colors hover:bg-[#b8860b] focus-visible:ring-[#d4af37]"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="size-4 animate-spin" />
+                    Signing in…
+                  </>
+                ) : (
+                  <>
+                    Open dashboard
+                    <ArrowRight className="size-4" />
+                  </>
+                )}
+              </Button>
+            </form>
+          </div>
+
+          <p className="flex items-start gap-2 text-sm leading-6 text-[#655c55]">
+            <ShieldCheck className="mt-0.5 size-4 shrink-0 text-[#8e7013]" aria-hidden="true" />
+            This area is restricted to authorised SOCIAL VIENS personnel.
+          </p>
+        </section>
+      </main>
     </div>
   );
 }
