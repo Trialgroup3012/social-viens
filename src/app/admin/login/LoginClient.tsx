@@ -69,7 +69,8 @@ export default function LoginClient() {
         return;
       }
 
-      localStorage.setItem(ADMIN_TOKEN_KEY, data.token);
+      // The signed HttpOnly cookie set by the server is the source of truth.
+      localStorage.setItem(ADMIN_TOKEN_KEY, "active");
       localStorage.setItem(ADMIN_USER_KEY, JSON.stringify(data.user));
       // Use a hard navigation so the new admin layout mounts fresh.
       window.location.href = "/admin";

@@ -20,11 +20,13 @@ export default function CookieConsent() {
 
   const handleAccept = () => {
     localStorage.setItem(CONSENT_KEY, "accepted");
+    window.dispatchEvent(new Event("sv-consent-change"));
     setVisible(false);
   };
 
   const handleDecline = () => {
     localStorage.setItem(CONSENT_KEY, "declined");
+    window.dispatchEvent(new Event("sv-consent-change"));
     setVisible(false);
   };
 

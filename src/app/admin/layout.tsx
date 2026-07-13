@@ -20,6 +20,7 @@ import {
   Bell,
   MessageSquare,
   Settings as SettingsIcon,
+  FileSearch,
   LogOut,
   Menu,
   ExternalLink,
@@ -73,6 +74,7 @@ const navItems: Array<{
   { href: "/admin/chat", label: "Chat History", icon: MessageSquare },
   { href: "/admin/pricing", label: "Pricing", icon: DollarSign },
   { href: "/admin/services", label: "Services", icon: Layers },
+  { href: "/admin/seo", label: "SEO Manager", icon: FileSearch },
   { href: "/admin/settings", label: "Settings", icon: SettingsIcon },
 ];
 

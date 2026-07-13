@@ -1,67 +1,74 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { createHash } from "crypto";
+import {
+  ADMIN_SESSION_COOKIE,
+  adminSessionMaxAge,
+  canAttemptAdminLogin,
+  clearAdminLoginAttempts,
+  createAdminSession,
+  hasAdminSessionSecret,
+  hashAdminPassword,
+  verifyAdminPassword,
+} from "@/lib/admin-auth";
 
-// Force Node.js runtime — uses Prisma + node:crypto (not Edge-compatible).
 export const runtime = "nodejs";
-
-// Simple non-bcrypt hash — must match the hash used by /api/seed when
-// bootstrapping the demo admin user (admin@socialviens.com / admin123).
-// NOT for production — this is a demo-only auth scheme.
-function hashPassword(plain: string): string {
-  return createHash("sha256")
-    .update(`sv$alt|${plain}`)
-    .digest("hex");
-}
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json().catch(() => null);
-    if (!body) {
+    if (!hasAdminSessionSecret()) {
       return NextResponse.json(
-        { error: "Invalid JSON body" },
-        { status: 400 }
+        { error: "Secure admin sessions are not configured yet." },
+        { status: 503 }
       );
     }
 
-    const { email, password } = body as { email?: string; password?: string };
+    const body = await request.json().catch(() => null);
+    if (!body) {
+      return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+    }
 
+    const { email, password } = body as { email?: string; password?: string };
     if (!email || !password) {
+      return NextResponse.json({ error: "Email and password required" }, { status: 400 });
+    }
+
+    const identifier = `${request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"}:${email.toLowerCase()}`;
+    if (!canAttemptAdminLogin(identifier)) {
       return NextResponse.json(
-        { error: "Email and password required" },
-        { status: 400 }
+        { error: "Too many sign-in attempts. Please try again in 15 minutes." },
+        { status: 429 }
       );
     }
 
     const user = await db.user.findUnique({ where: { email } });
-    if (!user || user.password !== hashPassword(password)) {
-      return NextResponse.json(
-        { error: "Invalid credentials" },
-        { status: 401 }
-      );
+    const passwordCheck = verifyAdminPassword(password, user?.password ?? null);
+    if (!user || !passwordCheck.valid || user.role !== "admin") {
+      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
-    // Stateless demo token — base64 of `email:timestamp`. NOT cryptographically
-    // secure; the layout only checks for presence of the token in localStorage.
-    const token = Buffer.from(`${email}:${Date.now()}`).toString("base64");
+    if (passwordCheck.needsUpgrade) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { password: hashAdminPassword(password) },
+      });
+    }
+    clearAdminLoginAttempts(identifier);
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
-      token,
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-      },
+      user: { id: user.id, email: user.email, name: user.name, role: user.role },
     });
-  } catch (error: any) {
-    return NextResponse.json(
-      {
-        error: "Login failed",
-        details: error?.message ?? String(error),
-      },
-      { status: 500 }
-    );
+    response.cookies.set({
+      name: ADMIN_SESSION_COOKIE,
+      value: createAdminSession({ id: user.id, email: user.email, role: user.role }),
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: adminSessionMaxAge,
+    });
+    return response;
+  } catch {
+    return NextResponse.json({ error: "Login failed" }, { status: 500 });
   }
 }

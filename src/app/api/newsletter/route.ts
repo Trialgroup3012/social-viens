@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { getAdminSession } from "@/lib/admin-auth";
 
 // Force Node.js runtime — uses Prisma (not Edge-compatible).
 export const runtime = "nodejs";
@@ -71,7 +72,11 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  if (!getAdminSession(request)) {
+    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+  }
+
   try {
     const subscribers = await db.newsletterSubscriber.findMany({
       where: { active: true },

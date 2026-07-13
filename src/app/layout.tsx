@@ -3,6 +3,8 @@ import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { SITE_URL } from "@/lib/schema";
+import TrackingScripts from "@/components/layout/TrackingScripts";
+import SeoOverrides from "@/components/layout/SeoOverrides";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -162,6 +164,8 @@ export default function RootLayout({
       >
         {children}
         <Toaster />
+        <TrackingScripts />
+        <SeoOverrides />
       </body>
     </html>
   );

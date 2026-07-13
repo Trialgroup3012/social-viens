@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import {
   fallbackServices,
   fallbackBlogPosts,
@@ -9,6 +9,7 @@ import {
 } from "@/lib/fallback-data";
 import { db } from "@/lib/db";
 import { createHash } from "crypto";
+import { getAdminSession } from "@/lib/admin-auth";
 
 // Force Node.js runtime — uses Prisma + node:crypto.
 export const runtime = "nodejs";
@@ -44,7 +45,15 @@ async function runStep(
   }
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  if (process.env.ALLOW_SEED !== "true") {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  if (!getAdminSession(request)) {
+    return NextResponse.json({ error: "Authentication required" }, { status: 401 });
+  }
+
   const results = {
     services: 0,
     blogPosts: 0,

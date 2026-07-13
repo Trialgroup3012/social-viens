@@ -27,6 +27,18 @@ function generateId() {
   return Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
 }
 
+function getSessionId() {
+  try {
+    const saved = sessionStorage.getItem('sv-chat-session');
+    if (saved && /^[A-Za-z0-9_-]{12,80}$/.test(saved)) return saved;
+    const created = generateId();
+    sessionStorage.setItem('sv-chat-session', created);
+    return created;
+  } catch {
+    return generateId();
+  }
+}
+
 function TypingIndicator() {
   return (
     <motion.div
@@ -78,7 +90,7 @@ export default function AIChatWidget() {
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [sessionId] = useState(() => generateId());
+  const [sessionId] = useState(getSessionId);
   const [showTooltip, setShowTooltip] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -138,7 +150,7 @@ export default function AIChatWidget() {
         body: JSON.stringify({ sessionId, message: text.trim() }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (data.success && data.response) {
         const aiMessage: Message = {
@@ -220,6 +232,7 @@ export default function AIChatWidget() {
             <div
               ref={chatContainerRef}
               className="flex-1 overflow-y-auto px-4 py-4 space-y-1"
+              aria-live="polite"
               style={{
                 scrollbarWidth: 'thin',
                 scrollbarColor: 'rgba(212,175,55,0.3) transparent',
@@ -294,6 +307,7 @@ export default function AIChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your message..."
+                maxLength={1200}
                 disabled={isLoading}
                 className="flex-1 bg-sv-elevated/50 border border-gold/10 rounded-xl px-4 py-2.5 text-sm text-cream placeholder:text-sv-muted/50 focus:outline-none focus:border-gold/30 focus:ring-1 focus:ring-gold/20 transition-all disabled:opacity-50"
               />

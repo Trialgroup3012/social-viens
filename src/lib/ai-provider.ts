@@ -10,6 +10,7 @@
  */
 
 import { db } from "@/lib/db";
+import { decryptSetting } from "@/lib/secure-settings";
 
 /* ------------------------------------------------------------------ */
 /* Types                                                              */
@@ -45,7 +46,7 @@ let cachedConfig: { data: AIProviderConfig | null; ts: number } = {
 };
 const CACHE_TTL_MS = 30_000; // 30 seconds
 
-function invalidateCache() {
+export function refreshAIProviderConfig(): void {
   cachedConfig = { data: null, ts: 0 };
 }
 
@@ -81,7 +82,7 @@ export async function getAIProviderConfig(): Promise<AIProviderConfig> {
       },
     });
     const map: Record<string, string> = {};
-    for (const r of rows) map[r.key] = r.value;
+    for (const r of rows) map[r.key] = decryptSetting(r.value);
 
     if (map.ai_provider && ["openai", "gemini", "zai"].includes(map.ai_provider)) {
       provider = map.ai_provider as AIProvider;
@@ -120,13 +121,6 @@ export async function getAIProviderConfig(): Promise<AIProviderConfig> {
   cachedConfig = { data: config, ts: Date.now() };
 
   return config;
-}
-
-/**
- * Force a config refresh (call after admin saves new AI settings).
- */
-export function refreshAIProviderConfig(): void {
-  invalidateCache();
 }
 
 /* ------------------------------------------------------------------ */

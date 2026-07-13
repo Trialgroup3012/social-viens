@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { db } from "@/lib/db";
 import { SITE_URL } from "@/lib/schema";
+import { decryptSetting } from "@/lib/secure-settings";
 
 /* ------------------------------------------------------------------ */
 /* Types                                                              */
@@ -137,7 +138,7 @@ export async function loadSmtpConfig(): Promise<SmtpConfig | null> {
       },
     });
     const map: Record<string, string> = {};
-    for (const r of rows) map[r.key] = r.value;
+    for (const r of rows) map[r.key] = decryptSetting(r.value);
 
     if (map.smtp_host && map.smtp_user && map.smtp_pass) {
       cfg = {

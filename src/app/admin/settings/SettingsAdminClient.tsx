@@ -29,7 +29,7 @@ interface SettingItem {
 /* Tab definitions                                                    */
 /* ------------------------------------------------------------------ */
 
-type TabKey = "site" | "chatbot" | "smtp";
+type TabKey = "site" | "chatbot" | "smtp" | "tracking";
 
 const TABS: Array<{
   key: TabKey;
@@ -54,6 +54,12 @@ const TABS: Array<{
     label: "Email / SMTP",
     icon: Mail,
     desc: "Gmail app password or business mail SMTP",
+  },
+  {
+    key: "tracking",
+    label: "Analytics & Pixels",
+    icon: Zap,
+    desc: "Google, GTM, Search Console and Meta Pixel",
   },
 ];
 
@@ -135,15 +141,24 @@ export default function SettingsAdminClient() {
   const [testing, setTesting] = useState<null | "ai" | "smtp">(null);
   const [showAiKey, setShowAiKey] = useState(false);
   const [showSmtpPass, setShowSmtpPass] = useState(false);
+  const [configuredKeys, setConfiguredKeys] = useState<string[]>([]);
 
   useEffect(() => {
     fetch("/api/admin/settings")
-      .then((res) => res.json())
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to load settings");
+        return data;
+      })
       .then((data) => {
         const map: Record<string, string> = {};
-        if (data.settings) {
+        if (Array.isArray(data.settings)) {
           data.settings.forEach((s: SettingItem) => {
             map[s.key] = s.value;
+          });
+        } else if (data.settings && typeof data.settings === "object") {
+          Object.entries(data.settings).forEach(([key, value]) => {
+            if (typeof value === "string") map[key] = value;
           });
         } else if (typeof data === "object") {
           Object.entries(data).forEach(([k, v]) => {
@@ -151,6 +166,7 @@ export default function SettingsAdminClient() {
           });
         }
         setSettings(map);
+        setConfiguredKeys(Array.isArray(data.configuredKeys) ? data.configuredKeys : []);
         setLoading(false);
       })
       .catch(() => {
@@ -166,7 +182,11 @@ export default function SettingsAdminClient() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ settings }),
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to save settings");
+        return data;
+      })
       .then(() => {
         toast.success("Settings saved successfully");
         setSaving(false);
@@ -181,11 +201,12 @@ export default function SettingsAdminClient() {
     setTesting(type);
     try {
       // Save first so the test endpoint reads the latest values
-      await fetch("/api/admin/settings", {
+      const saveResponse = await fetch("/api/admin/settings", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ settings }),
       });
+      if (!saveResponse.ok) throw new Error("Unable to save settings before testing");
 
       const res = await fetch("/api/admin/settings/test", {
         method: "POST",
@@ -276,7 +297,7 @@ export default function SettingsAdminClient() {
       </div>
 
       {/* Tabs */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
         {TABS.map((tab) => {
           const Icon = tab.icon;
           const active = activeTab === tab.key;
@@ -438,6 +459,11 @@ export default function SettingsAdminClient() {
               </button>
             </div>
             <p className="text-xs text-muted-foreground mb-5">
+              {configuredKeys.includes("ai_api_key") && !settings.ai_api_key && (
+                <span className="block mb-2 text-emerald-700 dark:text-emerald-400">
+                  A secure API key is already saved. Leave this field blank to keep it, or enter a replacement.
+                </span>
+              )}
               {aiProvider === "openai" && (
                 <>
                   Get your key from{" "}
@@ -525,7 +551,7 @@ export default function SettingsAdminClient() {
               <ul className="list-disc list-inside space-y-1 ml-1">
                 <li>The AI provider is read from the database on every chat message.</li>
                 <li>Config is cached for 30 seconds — changes take effect within 30s.</li>
-                <li>API keys are stored in the <code className="px-1 py-0.5 rounded bg-muted">SiteSetting</code> table.</li>
+                <li>API keys are encrypted before they are stored and are never sent back to the browser.</li>
                 <li>If no key is set, the bot replies with a fallback message pointing visitors to your phone/email.</li>
               </ul>
             </div>
@@ -654,6 +680,11 @@ export default function SettingsAdminClient() {
                     {showSmtpPass ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
+                {configuredKeys.includes("smtp_pass") && !settings.smtp_pass && (
+                  <p className="text-xs text-emerald-700 dark:text-emerald-400">
+                    A secure password is already saved. Leave blank to keep it, or enter a replacement.
+                  </p>
+                )}
               </div>
             </div>
 
@@ -733,6 +764,85 @@ export default function SettingsAdminClient() {
           </div>
         </div>
       )}
+
+      {/* ===================== ANALYTICS & PIXELS TAB ===================== */}
+      {activeTab === "tracking" && (
+        <div className="space-y-4">
+          <div className="bg-card border border-border rounded-xl p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <Zap className="h-5 w-5 text-[#D4AF37]" />
+              <h2 className="text-lg font-semibold">Analytics, Search & Advertising</h2>
+            </div>
+            <p className="text-sm text-muted-foreground mb-6">
+              Add IDs from your own accounts. Scripts load only after a visitor gives analytics consent.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <TrackingField
+                label="Google Tag Manager container"
+                placeholder="GTM-XXXXXXX"
+                value={settings.gtm_container_id || ""}
+                onChange={(value) => setField("gtm_container_id", value)}
+                help="Use the GTM container ID, not the whole script."
+              />
+              <TrackingField
+                label="Google Analytics 4 measurement ID"
+                placeholder="G-XXXXXXXXXX"
+                value={settings.ga_measurement_id || ""}
+                onChange={(value) => setField("ga_measurement_id", value)}
+                help="Recommended only when GA4 is not already installed through GTM."
+              />
+              <TrackingField
+                label="Google Search Console verification"
+                placeholder="Verification token only"
+                value={settings.google_site_verification || ""}
+                onChange={(value) => setField("google_site_verification", value)}
+                help="Paste the content value from Google's meta-verification tag."
+              />
+              <TrackingField
+                label="Meta Pixel ID"
+                placeholder="123456789012345"
+                value={settings.meta_pixel_id || ""}
+                onChange={(value) => setField("meta_pixel_id", value)}
+                help="Find this numeric ID in Meta Events Manager."
+              />
+            </div>
+          </div>
+          <div className="bg-[#D4AF37]/5 border border-[#D4AF37]/20 rounded-xl p-5 flex items-start gap-3">
+            <ShieldCheck className="h-5 w-5 text-[#D4AF37] flex-shrink-0 mt-0.5" />
+            <p className="text-sm text-muted-foreground">
+              These identifiers are public website IDs, not passwords. Never paste Google, Meta, SMTP or AI account passwords here.
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TrackingField({
+  label,
+  placeholder,
+  value,
+  onChange,
+  help,
+}: {
+  label: string;
+  placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
+  help: string;
+}) {
+  return (
+    <div className="space-y-2">
+      <label className="text-sm font-medium text-foreground">{label}</label>
+      <input
+        type="text"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        placeholder={placeholder}
+        className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-[#D4AF37] font-mono text-sm"
+      />
+      <p className="text-xs text-muted-foreground">{help}</p>
     </div>
   );
 }

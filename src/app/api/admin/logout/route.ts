@@ -1,11 +1,18 @@
 import { NextResponse } from "next/server";
+import { ADMIN_SESSION_COOKIE } from "@/lib/admin-auth";
 
-// Force Node.js runtime — keeps parity with other admin endpoints.
 export const runtime = "nodejs";
 
-// Stateless demo auth — there's no server-side session store, so the logout
-// endpoint simply acknowledges the request. The admin layout is responsible
-// for clearing `admin_token` / `admin_user` from localStorage on the client.
 export async function POST() {
-  return NextResponse.json({ success: true });
+  const response = NextResponse.json({ success: true });
+  response.cookies.set({
+    name: ADMIN_SESSION_COOKIE,
+    value: "",
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 0,
+  });
+  return response;
 }
