@@ -2,6 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  async redirects() {
+    return [
+      {
+        source: "/services/seo-services-delhi",
+        destination: "/seo-services-delhi",
+        permanent: true,
+      },
+      {
+        source: "/services/startup-it-support",
+        destination: "/startup-it-support",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
