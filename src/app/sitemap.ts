@@ -4,11 +4,13 @@ import { getAllServiceSlugs } from "@/lib/services-data";
 import { blogPosts, getAllCategories } from "@/lib/blog-data";
 import { industryPages } from "@/lib/industry-data";
 import { locationPages } from "@/lib/location-data";
+import { healthcareLocationPages } from "@/lib/healthcare-location-data";
 
 /**
  * Dynamic sitemap for SOCIAL VIENS (Spec §9.1).
  * Includes: 13 static + 9 service detail + 8 blog posts + 5 blog categories
- * + 12 industry landing + 7 Delhi location + 7 Dwarka location = 61 URLs.
+ * + 12 industry landing + 7 Delhi location + 7 Dwarka location
+ * + 8 healthcare location landing pages = 69 URLs.
  */
 
 type ChangeFreq =
@@ -88,6 +90,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry(`/${p.slug}`, "monthly", 0.6),
   );
 
+  const healthcareEntries: SitemapEntry[] = healthcareLocationPages.map((page) =>
+    entry(`/${page.slug}`, "monthly", 0.7),
+  );
+
   return [
     ...staticEntries,
     ...serviceEntries,
@@ -95,5 +101,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...categoryEntries,
     ...industryEntries,
     ...locationEntries,
+    ...healthcareEntries,
   ];
 }

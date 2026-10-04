@@ -27,6 +27,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import PageShell from "@/components/layout/PageShell";
+import HealthcareLocationLinks from "@/components/HealthcareLocationLinks";
 import AnimatedHeading from "@/components/ui/animated-heading";
 import {
   Accordion,
@@ -765,6 +766,7 @@ export default function DoctorsClinicsClient() {
       </section>
 
       {/* ===== Final CTA ===== */}
+      <HealthcareLocationLinks />
       <section className="relative py-16 md:py-24 bg-gradient-maroon">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div

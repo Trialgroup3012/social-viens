@@ -45,7 +45,7 @@ Do not invent client counts, rankings, conversion percentages, case studies, tes
 ## SEO and structured data
 
 - Provide unique, concise title and description metadata, canonical, Open Graph values, one clear H1, and descriptive internal links for every page.
-- Use breadcrumb and service structured data consistent with existing `src/lib/schema.ts` helpers. FAQ schema is emitted only where the visible page includes matching FAQs.
+- Use breadcrumb and FAQ structured data consistent with existing `src/lib/schema.ts` helpers. Add accurate Service structured data for each page with its canonical URL and service area; omit offers/pricing. FAQ schema is emitted only where the visible page includes matching FAQs.
 - Ensure structured data accurately identifies the marketing service and service area. Do not use hospital/doctor medical-provider schema for SOCIAL VIENS.
 - Avoid generating location doorway pages: each page must contain genuinely distinct audience, geography, buyer questions, and service context.
 

@@ -26,6 +26,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import PageShell from "@/components/layout/PageShell";
+import HealthcareLocationLinks from "@/components/HealthcareLocationLinks";
 import AnimatedHeading from "@/components/ui/animated-heading";
 import {
   Accordion,
@@ -657,6 +658,7 @@ export default function DelhiNcrClient() {
       </section>
 
       {/* ===== Final CTA ===== */}
+      <HealthcareLocationLinks />
       <section className="relative py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div

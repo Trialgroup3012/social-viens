@@ -1,3 +1,5 @@
+/// <reference types="bun-types" />
+
 import { expect, test } from "bun:test";
 import nextConfig from "../next.config";
 

@@ -62,6 +62,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import PageShell from "@/components/layout/PageShell";
+import HealthcareLocationLinks from "@/components/HealthcareLocationLinks";
 import AnimatedHeading from "@/components/ui/animated-heading";
 import {
   Accordion,
@@ -1034,6 +1035,8 @@ export default function IndustryLandingPage({
 
       {/* ===== RELATED INDUSTRIES ===== */}
       <RelatedIndustriesGrid industry={industry} />
+
+      {industry.slug === "medical-marketing" && <HealthcareLocationLinks />}
 
       {/* ===== FINAL CTA ===== */}
       <section className="relative py-16 md:py-24">
