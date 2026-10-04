@@ -28,6 +28,7 @@ export function generateMetadata({
     return {
       title: `${post.title} | SOCIAL VIENS`,
       description: post.excerpt,
+      alternates: { canonical: `/blog/${slug}` },
       keywords: post.tags,
       authors: [{ name: post.author }],
       openGraph: {
@@ -37,11 +38,13 @@ export function generateMetadata({
         publishedTime: post.publishedAt,
         authors: [post.author],
         locale: "en_IN",
+        images: post.featuredImage ? [post.featuredImage] : undefined,
       },
       twitter: {
         card: "summary_large_image",
         title: post.title,
         description: post.excerpt,
+        images: post.featuredImage ? [post.featuredImage] : undefined,
       },
     };
   })();
@@ -66,6 +69,7 @@ export default async function BlogPostPage({
     authorRole: post.authorRole,
     category: post.category,
     slug: post.slug,
+    featuredImage: post.featuredImage || "/social-viens-logo.png",
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([

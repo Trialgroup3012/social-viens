@@ -4,7 +4,6 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { SITE_URL } from "@/lib/schema";
 import TrackingScripts from "@/components/layout/TrackingScripts";
-import SeoOverrides from "@/components/layout/SeoOverrides";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "SOCIAL VIENS | Premium Digital Marketing Agency in India",
   description:
-    "We help ambitious businesses dominate search engines, generate quality leads, build unforgettable brands, and scale revenue through AI-powered digital marketing. Real Estate, Healthcare, Law Firms & more.",
+    "Digital marketing for Indian businesses: SEO, paid ads, social media, branding and website growth from SOCIAL VIENS.",
   keywords: [
     "digital marketing agency",
     "SEO services India",
@@ -51,16 +50,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SOCIAL VIENS | Premium Digital Marketing Agency",
     description:
-      "Elevate your digital presence. AI-powered digital marketing for ambitious brands.",
+      "SEO, paid ads, social media, branding and website growth for Indian businesses.",
     siteName: "SOCIAL VIENS",
     type: "website",
     locale: "en_IN",
+    images: [{ url: "/social-viens-logo.png", width: 2000, height: 2000, alt: "SOCIAL VIENS" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "SOCIAL VIENS | Premium Digital Marketing Agency",
     description:
-      "Elevate your digital presence. AI-powered digital marketing for ambitious brands.",
+      "SEO, paid ads, social media, branding and website growth for Indian businesses.",
+    images: ["/social-viens-logo.png"],
   },
 };
 
@@ -96,50 +97,6 @@ const jsonLd = {
     "Marketing Automation",
   ],
   priceRange: "₹₹₹",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "50",
-  },
-};
-
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What services does Social Viens offer?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "We offer Website Development, SEO, Local SEO, Google Business Profile Optimization, Paid Advertising, Social Media Marketing, Branding & Design, Marketing Automation, and Lead Generation.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How much does digital marketing cost?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Our pricing is customized based on your business goals. Packages start from ₹25,000/month for small businesses.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How long does it take to see results?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Paid advertising shows results within 2-4 weeks. SEO and organic growth take 3-6 months for significant results.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you offer a free consultation?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes! We offer a completely free, no-obligation strategy session where we analyze your business and create a custom roadmap.",
-      },
-    },
-  ],
 };
 
 export default function RootLayout({
@@ -154,10 +111,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
       </head>
       <body
         className={`${inter.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
@@ -165,7 +118,6 @@ export default function RootLayout({
         {children}
         <Toaster />
         <TrackingScripts />
-        <SeoOverrides />
       </body>
     </html>
   );

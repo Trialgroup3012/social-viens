@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { getAdminSession } from "@/lib/admin-auth";
 import {
@@ -33,9 +34,6 @@ export async function GET(request: NextRequest) {
   );
 
   const pages = CORE_SEO_PAGES.map((page) => overrides.get(page.path) || { ...page, updatedAt: null, isOverride: false });
-  for (const [path, override] of overrides) {
-    if (!CORE_SEO_PAGES.some((page) => page.path === path)) pages.push(override);
-  }
   return NextResponse.json({ pages });
 }
 
@@ -48,6 +46,9 @@ export async function PUT(request: NextRequest) {
   const title = typeof body?.title === "string" ? body.title.trim() : "";
   const description = typeof body?.description === "string" ? body.description.trim() : "";
   if (!path) return NextResponse.json({ error: "Enter a valid path beginning with /." }, { status: 400 });
+  if (!CORE_SEO_PAGES.some((page) => page.path === path)) {
+    return NextResponse.json({ error: "Choose one of the managed pages." }, { status: 400 });
+  }
   if (!title || title.length > 70) return NextResponse.json({ error: "Title is required and must be 70 characters or fewer." }, { status: 400 });
   if (!description || description.length > 170) return NextResponse.json({ error: "Description is required and must be 170 characters or fewer." }, { status: 400 });
 
@@ -57,6 +58,7 @@ export async function PUT(request: NextRequest) {
     create: { key: seoSettingKey(path), value },
     update: { value },
   });
+  revalidatePath(path);
   return NextResponse.json({ page: { path, title, description, updatedAt: saved.updatedAt.toISOString(), isOverride: true } });
 }
 
@@ -66,6 +68,10 @@ export async function DELETE(request: NextRequest) {
 
   const path = normaliseSeoPath(new URL(request.url).searchParams.get("path") || "");
   if (!path) return NextResponse.json({ error: "Enter a valid path." }, { status: 400 });
+  if (!CORE_SEO_PAGES.some((page) => page.path === path)) {
+    return NextResponse.json({ error: "Choose one of the managed pages." }, { status: 400 });
+  }
   await db.siteSetting.delete({ where: { key: seoSettingKey(path) } }).catch(() => null);
+  revalidatePath(path);
   return NextResponse.json({ success: true });
 }

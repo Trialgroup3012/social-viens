@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import TestimonialsClient from "./TestimonialsClient";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/schema";
+import { withSeoOverride } from "@/lib/server-seo";
 
-export const metadata: Metadata = {
-  title: "Client Testimonials & Success Stories | SOCIAL VIENS",
+const metadata: Metadata = {
+  alternates: { canonical: "/testimonials" },
+  title: "Client Testimonials | SOCIAL VIENS",
   description:
-    "Real results from real clients. 50+ businesses across real estate, healthcare, law, e-commerce, restaurants, and beauty share their growth stories with Social Viens.",
+    "Read client feedback and selected project outcomes across industries served by SOCIAL VIENS.",
   keywords: [
     "digital marketing testimonials",
     "client success stories",
@@ -15,13 +17,18 @@ export const metadata: Metadata = {
     "ROI marketing",
   ],
   openGraph: {
+    images: ["/social-viens-logo.png"],
     title: "Client Success Stories | SOCIAL VIENS",
     description:
-      "750+ happy clients. 4.9/5 average rating. 350% average ROI. Read what our clients say about working with Social Viens.",
+      "Read client feedback and selected project outcomes from SOCIAL VIENS.",
     type: "website",
     locale: "en_IN",
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride("/testimonials", metadata);
+}
 
 export default function TestimonialsPage() {
   const breadcrumbSchema = generateBreadcrumbSchema([

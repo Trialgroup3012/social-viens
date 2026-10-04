@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { withSeoOverride } from "@/lib/server-seo";
 import TopBar from "@/components/layout/TopBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -18,6 +20,10 @@ import Pricing from "@/components/sections/Pricing";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride("/", { alternates: { canonical: "/" } });
+}
 
 export default function Home() {
   return (

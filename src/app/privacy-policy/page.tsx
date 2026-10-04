@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import PrivacyPolicyClient from "./PrivacyPolicyClient";
+import { withSeoOverride } from "@/lib/server-seo";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
+  alternates: { canonical: "/privacy-policy" },
   title: "Privacy Policy | SOCIAL VIENS",
   description:
-    "How Social Viens collects, uses, and protects your personal information. Learn about your rights, our data practices, and contact options for privacy-related queries.",
+    "Learn how SOCIAL VIENS handles personal information, website data and privacy requests.",
   keywords: [
     "privacy policy",
     "data protection India",
@@ -13,6 +15,7 @@ export const metadata: Metadata = {
     "GDPR compliance",
   ],
   openGraph: {
+    images: ["/social-viens-logo.png"],
     title: "Privacy Policy | SOCIAL VIENS",
     description:
       "How Social Viens collects, uses, and safeguards your personal data.",
@@ -20,6 +23,10 @@ export const metadata: Metadata = {
     locale: "en_IN",
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride("/privacy-policy", metadata);
+}
 
 export default function PrivacyPolicyPage() {
   return <PrivacyPolicyClient />;

@@ -20,6 +20,7 @@ export function generateMetadata(): Metadata {
   const industry = getIndustryBySlug(SLUG);
   if (!industry) return {};
   return {
+    alternates: { canonical: `/${SLUG}` },
     title: industry.metaTitle,
     description: industry.metaDescription,
     keywords: [
@@ -30,6 +31,7 @@ export function generateMetadata(): Metadata {
       "Delhi NCR",
     ],
     openGraph: {
+      images: ["/social-viens-logo.png"],
       title: industry.metaTitle,
       description: industry.metaDescription,
       type: "website",

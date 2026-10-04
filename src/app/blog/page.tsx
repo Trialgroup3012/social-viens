@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import BlogClient from "./BlogClient";
+import { withSeoOverride } from "@/lib/server-seo";
 
-export const metadata: Metadata = {
-  title: "Blog & Insights | Growth Marketing Strategies — SOCIAL VIENS",
+const metadata: Metadata = {
+  alternates: { canonical: "/blog" },
+  title: "Digital Marketing Insights | SOCIAL VIENS",
   description:
-    "Practical, no-fluff growth marketing insights from the Social Viens team. Real strategies for SEO, paid ads, branding, web design, and social media — backed by real campaign data.",
+    "Explore practical guides to SEO, paid ads, branding, web design and social media from the SOCIAL VIENS team.",
   keywords: [
     "digital marketing blog",
     "SEO strategies India",
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
     "social media strategy 2026",
   ],
   openGraph: {
+    images: ["/social-viens-logo.png"],
     title: "Blog & Insights | SOCIAL VIENS",
     description:
       "Practical growth marketing insights from the Social Viens team — backed by real campaign data.",
@@ -22,6 +25,10 @@ export const metadata: Metadata = {
     locale: "en_IN",
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride("/blog", metadata);
+}
 
 export default function BlogPage() {
   return <BlogClient />;

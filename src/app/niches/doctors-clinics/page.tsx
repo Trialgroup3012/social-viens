@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import DoctorsClinicsClient from "./DoctorsClinicsClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/niches/doctors-clinics" },
   title: "Digital Marketing for Doctors & Clinics | SOCIAL VIENS",
   description:
-    "Healthcare-specialised digital marketing for doctors, clinics, and hospitals. Medical SEO, patient acquisition ads, GBP optimisation, and doctor personal branding. 7x patient inquiry growth.",
+    "Digital marketing for doctors and clinics, including healthcare SEO, local profile optimisation, patient enquiry campaigns and professional content.",
   keywords: [
     "healthcare marketing India",
     "doctor marketing",
@@ -16,9 +17,10 @@ export const metadata: Metadata = {
     "Google Business Profile for clinics",
   ],
   openGraph: {
+    images: ["/social-viens-logo.png"],
     title: "Digital Marketing for Doctors & Clinics | SOCIAL VIENS",
     description:
-      "Compliance-aware healthcare marketing that builds trust and acquires patients. 7x patient inquiry growth.",
+      "Digital marketing services for doctors, clinics and hospitals.",
     type: "website",
     locale: "en_IN",
   },

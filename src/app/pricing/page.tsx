@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import PricingClient from "./PricingClient";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/schema";
+import { withSeoOverride } from "@/lib/server-seo";
 
-export const metadata: Metadata = {
-  title: "Pricing — Social Viens | Transparent Digital Marketing Plans",
+const metadata: Metadata = {
+  alternates: { canonical: "/pricing" },
+  title: "Digital Marketing Pricing | SOCIAL VIENS",
   description:
-    "Transparent pricing for every stage of growth. Starter ₹25K/mo, Professional ₹65K/mo (most popular), Enterprise custom. 30-day money-back guarantee.",
+    "Compare digital marketing plans for different business goals. Review pricing details and request a tailored proposal from our team.",
   keywords: [
     "digital marketing pricing India",
     "SEO pricing",
@@ -14,12 +16,17 @@ export const metadata: Metadata = {
     "marketing agency packages",
   ],
   openGraph: {
+    images: ["/social-viens-logo.png"],
     title: "Pricing — Social Viens",
     description:
       "Transparent pricing, no hidden fees. Every plan is designed to deliver measurable ROI.",
     type: "website",
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride("/pricing", metadata);
+}
 
 export default function PricingPage() {
   const breadcrumbSchema = generateBreadcrumbSchema([

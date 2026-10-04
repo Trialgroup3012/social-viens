@@ -10,7 +10,7 @@
  * No side effects. No imports of data files — callers pass plain data in.
  */
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://socialviens.in").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.socialviens.in").replace(/\/$/, "");
 export const SITE_NAME = "SOCIAL VIENS";
 export const SITE_PHONE = "+918178004800";
 export const SITE_EMAIL = "socialviens@gmail.com";
@@ -61,13 +61,14 @@ export function generateArticleSchema(post: {
   authorRole: string;
   category: string;
   slug: string;
+  featuredImage: string;
 }) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
-    image: `${SITE_URL}/blog/${post.slug}/og-image`,
+    image: `${SITE_URL}${post.featuredImage}`,
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
     articleSection: post.category,

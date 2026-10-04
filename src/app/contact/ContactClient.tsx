@@ -273,7 +273,7 @@ export default function ContactClient() {
             transition={{ duration: 0.8 }}
             className="flex justify-center mb-6"
           >
-            <AnimatedHeading text1="Get In" text2="Touch" className="!mb-0" />
+            <AnimatedHeading as="h1" text1="Get In" text2="Touch" className="!mb-0" />
           </motion.div>
 
           <motion.p

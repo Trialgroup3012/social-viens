@@ -25,15 +25,15 @@ export function deslugifyCategory(slug: string): BlogCategory | null {
 // Category descriptions (used in the client sidebar + meta).
 export const categoryDescriptions: Record<BlogCategory, string> = {
   SEO:
-    "Search engine optimisation strategies, technical SEO, local SEO for Delhi NCR, Google Business Profile optimisation, and content that ranks. Practical playbooks from our SEO practice.",
+    "Guides to technical SEO, local search, Google Business Profile and useful content for organic visibility.",
   "Social Media":
-    "Instagram, LinkedIn, Facebook, and YouTube strategies that actually convert. Content calendars, growth tactics, community management, and paid social playbooks.",
+    "Ideas for Instagram, LinkedIn, Facebook and YouTube content, community management and paid social.",
   Branding:
-    "Brand identity, positioning, visual design, and storytelling for ambitious businesses. How to build a premium brand from scratch — and refresh an existing one.",
+    "Articles on brand identity, positioning, visual design and storytelling for growing businesses.",
   "Web Design":
-    "Website design and development, conversion rate optimisation, landing page best practices, and the technical foundations of a high-performing site.",
+    "Advice on website design, development, landing pages and conversion-focused site improvements.",
   "Paid Ads":
-    "Google Ads, Meta Ads, LinkedIn Ads, YouTube Ads — strategy, structuring, creative, bidding, and the ROAS maths that separates winners from losers.",
+    "Practical guidance for Google, Meta, LinkedIn and YouTube campaigns, from setup to measurement.",
 };
 
 // Helper used by metadata + client to compute post counts.

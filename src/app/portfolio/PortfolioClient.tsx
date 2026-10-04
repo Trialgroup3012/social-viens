@@ -307,6 +307,7 @@ export default function PortfolioClient() {
             className="flex justify-center mb-6"
           >
             <AnimatedHeading
+              as="h1"
               text1="Our"
               text2="Portfolio"
               className="!mb-0"

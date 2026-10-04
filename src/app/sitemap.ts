@@ -19,18 +19,16 @@ type ChangeFreq =
 
 interface SitemapEntry {
   url: string;
-  lastModified: Date;
+  lastModified?: Date;
   changeFrequency: ChangeFreq;
   priority: number;
 }
-
-const now = new Date();
 
 function entry(
   path: string,
   changeFrequency: ChangeFreq,
   priority: number,
-  lastModified: Date = now,
+  lastModified?: Date,
 ): SitemapEntry {
   return {
     url: `${SITE_URL}${path}`,

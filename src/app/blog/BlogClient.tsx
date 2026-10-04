@@ -276,7 +276,7 @@ export default function BlogClient() {
               <Sparkles className="w-3.5 h-3.5" />
               Blog & Insights
             </motion.div>
-            <AnimatedHeading text1="Growth" text2="Insights" />
+            <AnimatedHeading as="h1" text1="Growth" text2="Insights" />
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

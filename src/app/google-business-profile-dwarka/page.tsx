@@ -20,6 +20,7 @@ export function generateMetadata(): Metadata {
   const page = getLocationBySlug(SLUG);
   if (!page) return {};
   return {
+    alternates: { canonical: `/${SLUG}` },
     title: page.metaTitle,
     description: page.metaDescription,
     keywords: [
@@ -29,6 +30,7 @@ export function generateMetadata(): Metadata {
       "SOCIAL VIENS",
     ],
     openGraph: {
+      images: ["/social-viens-logo.png"],
       title: page.metaTitle,
       description: page.metaDescription,
       type: "website",

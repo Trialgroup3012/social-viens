@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import DelhiNcrClient from "./DelhiNcrClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/locations/delhi-ncr" },
   title: "Digital Marketing Agency in Delhi NCR | SOCIAL VIENS",
   description:
-    "Social Viens is a results-driven digital marketing agency serving Delhi NCR. SEO, Google Ads, social media, web development & branding for Delhi businesses. 500+ local clients, 350% avg ROI.",
+    "SEO, paid ads, social media, website development and branding for businesses across Delhi NCR. Talk with our team about your goals.",
   keywords: [
     "digital marketing agency Delhi NCR",
     "SEO services Delhi",
@@ -17,9 +18,10 @@ export const metadata: Metadata = {
     "marketing agency Gurgaon",
   ],
   openGraph: {
+    images: ["/social-viens-logo.png"],
     title: "Digital Marketing Agency in Delhi NCR | SOCIAL VIENS",
     description:
-      "Helping Delhi NCR businesses dominate search, generate leads, and scale revenue. 500+ local clients, 350% avg ROI.",
+      "Digital marketing services for businesses across Delhi NCR.",
     type: "website",
     locale: "en_IN",
   },

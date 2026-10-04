@@ -262,7 +262,7 @@ export const services: Service[] = [
   },
   {
     slug: "local-seo",
-    coverImage: "/images/services/local-seo.png",
+    coverImage: "/images/services/seo-services.png",
     title: "Local SEO",
     icon: "MapPin",
     shortDescription:

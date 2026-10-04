@@ -74,16 +74,16 @@ export default function SeoAdminClient() {
     <div className="space-y-6 max-w-6xl">
       <div>
         <h1 className="text-2xl font-bold text-foreground flex items-center gap-2"><FileSearch className="size-6 text-[#D4AF37]" /> SEO Manager</h1>
-        <p className="mt-1 text-sm text-muted-foreground">Edit a page&apos;s meta title and description, or add any website path. Reset restores its built-in default.</p>
+        <p className="mt-1 text-sm text-muted-foreground">Edit the meta title and description for a managed page. Reset restores its built-in default.</p>
       </div>
       <section className="bg-card border border-border rounded-xl p-5">
         <div className="flex items-center gap-2 mb-4"><Plus className="size-4 text-[#D4AF37]" /><h2 className="font-semibold">Add or update metadata</h2></div>
         <div className="grid gap-4 md:grid-cols-2">
-          <Field label="Page path" value={form.path} placeholder="/services/seo" onChange={(path) => setForm({ ...form, path })} />
+          <div className="space-y-1.5"><label className="text-sm font-medium">Managed page</label><select value={form.path} onChange={(event) => setForm({ ...form, path: event.target.value })} className="w-full px-3 py-2 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"><option value="">Select a page</option>{pages.map((page) => <option key={page.path} value={page.path}>{page.path}</option>)}</select></div>
           <Field label={`Meta title (${form.title.length}/70)`} value={form.title} placeholder="Primary keyword | Brand" onChange={(title) => setForm({ ...form, title })} />
           <div className="md:col-span-2 space-y-1.5"><label className="text-sm font-medium">Meta description ({form.description.length}/170)</label><textarea value={form.description} maxLength={170} onChange={(event) => setForm({ ...form, description: event.target.value })} className="w-full min-h-24 px-3 py-2 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" placeholder="Clear benefit-led description for search results." /></div>
         </div>
-        <button onClick={() => void save()} disabled={saving} className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#D4AF37] text-black font-semibold disabled:opacity-50">{saving ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />} Save metadata</button>
+        <button onClick={() => void save()} disabled={saving || !form.path} className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#D4AF37] text-black font-semibold disabled:opacity-50">{saving ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />} Save metadata</button>
       </section>
       <section className="bg-card border border-border rounded-xl overflow-hidden">
         <div className="flex items-center justify-between p-5 border-b border-border"><h2 className="font-semibold">Managed pages</h2><button onClick={() => void load()} className="p-2 rounded-md hover:bg-muted" aria-label="Refresh"><RotateCcw className="size-4" /></button></div>

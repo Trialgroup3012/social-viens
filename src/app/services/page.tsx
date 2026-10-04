@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import ServicesClient from "./ServicesClient";
+import { withSeoOverride } from "@/lib/server-seo";
 
-export const metadata: Metadata = {
-  title: "Our Services | Premium Digital Marketing — SOCIAL VIENS",
+const metadata: Metadata = {
+  alternates: { canonical: "/services" },
+  title: "Digital Marketing Services | SOCIAL VIENS",
   description:
-    "9 comprehensive digital marketing services: Website Development, SEO, Local SEO, Google Business Profile, Paid Ads, Social Media, Branding, Automation, and Lead Generation. Starting at ₹8,000/month.",
+    "Explore SEO, paid ads, social media, branding, websites and automation services for business growth. Review available services and pricing.",
   keywords: [
     "digital marketing services India",
     "SEO services",
@@ -16,11 +18,16 @@ export const metadata: Metadata = {
     "marketing automation",
   ],
   openGraph: {
-    title: "Our Services | SOCIAL VIENS",
+    images: ["/social-viens-logo.png"],
+    title: "Digital Marketing Services | SOCIAL VIENS",
     description:
       "Nine premium digital marketing services designed to deliver measurable growth. Explore each service in detail.",
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride("/services", metadata);
+}
 
 export default function ServicesPage() {
   return <ServicesClient />;

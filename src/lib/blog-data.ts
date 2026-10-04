@@ -29,9 +29,9 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "10-local-seo-strategies-delhi-2026",
-    title: "10 Local SEO Strategies for Delhi Businesses in 2026",
+    title: "10 Local SEO Strategies for Delhi in 2026",
     excerpt:
-      "Delhi's local search landscape is more competitive than ever. These 10 proven local SEO tactics will help your business show up in the Map Pack and dominate neighbourhood-level searches across NCR.",
+      "Use these ten practical local SEO steps to improve your Delhi business profile, neighbourhood pages, reviews and visibility in local search.",
     category: "SEO",
     tags: ["Local SEO", "Google Business Profile", "Delhi", "Map Pack", "Reviews"],
     author: "Priya Sharma",
@@ -93,9 +93,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "google-business-profile-matters-more-than-website",
     featuredImage: "/images/blog/02-google-business-profile.png",
-    title: "Why Your Google Business Profile Matters More Than Your Website",
+    title: "Google Business Profile for Local Businesses",
     excerpt:
-      "For local businesses, your Google Business Profile often sees 5-10x more impressions than your website. Here's why GBP is the new front door — and how to optimise it for conversions.",
+      "Learn how a Google Business Profile supports local discovery, customer enquiries and trust, plus practical ways to keep your listing useful.",
     category: "SEO",
     tags: ["Google Business Profile", "Local SEO", "Conversion", "Reviews"],
     author: "Priya Sharma",
@@ -178,9 +178,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "website-speed-hidden-conversion-killer",
     featuredImage: "/images/blog/04-website-conversion.png",
-    title: "Website Speed: The Hidden Conversion Killer You're Ignoring",
+    title: "Website Speed and Conversions: What to Fix",
     excerpt:
-      "A 1-second delay can cut conversions by 20%. We break down why speed matters, how to measure it, and the 8 fixes that deliver the biggest performance gains for Indian businesses.",
+      "See how page speed affects user experience, how to measure Core Web Vitals and which website improvements to consider first.",
     category: "Web Design",
     tags: ["Performance", "Core Web Vitals", "Conversion", "Page Speed"],
     author: "Neha Gupta",
@@ -255,9 +255,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "real-estate-developers-100-leads-monthly",
     featuredImage: "/images/blog/07-content-marketing.png",
-    title: "How Real Estate Developers Can Generate 100+ Qualified Leads Monthly",
+    title: "A Digital Marketing Plan for Real Estate Leads",
     excerpt:
-      "A proven paid + organic playbook that's helped Delhi-NCR developers build a predictable pipeline of high-intent buyers — without burning budget on generic awareness ads.",
+      "A practical paid and organic marketing framework for Delhi NCR property developers seeking more relevant buyer enquiries.",
     category: "Paid Ads",
     tags: ["Real Estate", "Lead Generation", "Google Ads", "Meta Ads", "Delhi NCR"],
     author: "Arjun Malhotra",
@@ -371,9 +371,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "luxury-brand-identity-90-day-playbook",
     featuredImage: "/images/blog/06-brand-identity-design.png",
-    title: "Building a Luxury Brand Identity from Scratch: A 90-Day Playbook",
+    title: "Luxury Brand Identity: A 90-Day Plan",
     excerpt:
-      "Luxury isn't a logo — it's a feeling. Here's the step-by-step process we use to build premium brands that command higher prices and unshakeable customer trust.",
+      "Explore a structured 90-day approach to brand positioning, identity and customer experience for businesses building a premium brand.",
     category: "Branding",
     tags: ["Branding", "Luxury", "Positioning", "Visual Identity", "Strategy"],
     author: "Rahul Verma",
@@ -460,9 +460,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "social-media-strategies-that-convert-2026",
     featuredImage: "/images/blog/03-instagram-aesthetics.png",
-    title: "Social Media Strategies That Actually Convert in 2026",
+    title: "Social Media Strategies That Convert in 2026",
     excerpt:
-      "Stop chasing likes. The platforms have changed, the algorithms have changed, and what worked in 2022 actively hurts you now. Here's the conversion-first framework we use.",
+      "Plan social media around useful content, relevant audiences and business goals with this conversion-focused framework for 2026.",
     category: "Social Media",
     tags: ["Social Media", "Content Strategy", "Conversion", "Instagram", "LinkedIn"],
     author: "Ananya Patel",
@@ -556,9 +556,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "google-ads-roas-300-percent-guide",
     featuredImage: "/images/blog/05-paid-ads-roas.png",
-    title: "Google Ads ROAS: How to Hit 300%+ Consistently",
+    title: "Google Ads ROAS: Improve Campaign Returns",
     excerpt:
-      "Most accounts plateau at 150–200% ROAS because they're optimising for clicks, not revenue. Here's the account structure, bidding strategy, and tracking stack that breaks through.",
+      "Learn how account structure, conversion tracking and bidding choices work together when improving return on Google Ads spend.",
     category: "Paid Ads",
     tags: ["Google Ads", "ROAS", "Performance Max", "Conversion Tracking", "E-commerce"],
     author: "Vikram Singh",
@@ -658,9 +658,9 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "why-your-website-isnt-converting-how-to-fix-it",
     featuredImage: "/images/blog/08-marketing-automation.png",
-    title: "Why Your Website Isn't Converting (And How to Fix It)",
+    title: "Why Your Website Isn't Converting",
     excerpt:
-      "You're getting traffic but no leads. The 7 most common conversion killers we see on every website audit — and the specific fixes that double or triple conversion rates.",
+      "Find common reasons visitors leave without enquiring, from unclear messaging to slow pages, and learn how to prioritise improvements.",
     category: "Web Design",
     tags: ["Conversion Rate", "UX", "Landing Pages", "CRO", "Forms"],
     author: "Neha Gupta",

@@ -89,10 +89,9 @@ const websiteDevelopmentDelhi: LocationServicePage = {
   icon: "Globe",
   heroSubtitle:
     "Conversion-engineered websites built for Delhi's brutal, mobile-first market. Lightning-fast, SEO-ready, and crafted to turn South Delhi browsers into paying customers.",
-  metaTitle:
-    "Website Development in Delhi | Custom Web Design | SOCIAL VIENS",
+  metaTitle: "Website Development in Delhi | SOCIAL VIENS",
   metaDescription:
-    "Delhi's trusted website development agency. We build fast, mobile-first, SEO-ready websites that convert. 50+ Delhi NCR clients. Free strategy session. Get a quote today.",
+    "Get a fast, mobile-friendly website built for your Delhi business, with search-ready structure and clear paths for customer enquiries.",
   overviewTitle: "Websites built to win in Delhi's digital marketplace",
   overviewText:
     "Delhi is India's most demanding consumer market. Over 32 million people live in the NCR, and every one of them carries a smartphone that decides in under three seconds whether your business is worth their time. A generic template website — slow, forgettable, identical to a thousand others — will not survive in a city where the next ten competitors are one tap away. Our website development in Delhi is engineered specifically for this reality. We design and build bespoke, mobile-first websites that load in under two seconds, score 90+ on Lighthouse, and convert visitors who found you via a Connaught Place Google search, a Karol Bagh Instagram ad, or a Nehru Place referral. Every site we ship starts with a discovery session where we map your customer journey, audit your top three Delhi competitors, and define the conversion events that actually matter — form fills, WhatsApp chats, phone calls, walk-ins. Then our design team crafts a visual identity that respects your brand and the premium expectations of the Delhi consumer. Development is in-house, no outsourcing: semantic HTML5, server-side rendering where it counts, structured data for local SEO, GA4 + Meta Pixel instrumentation, and a CMS workflow your team can actually use. We integrate WhatsApp Business APIs, Razorpay and Stripe payment rails, Zoho and Salesforce CRM hooks, and Google Business Profile sync — so your website is the operational heart of your Delhi business, not a static brochure. Whether you are a South Extension boutique, a Lajpat Nagar clinic, a Saket restaurant, or a Nehru Place B2B firm, our websites are built to rank, load, and convert in this specific market. We have shipped 80+ production sites for Delhi NCR businesses across real estate, healthcare, legal, F&B, retail, and professional services — and we maintain every one of them with security patches, performance tuning, and quarterly conversion optimization reviews. This is not website design. This is digital infrastructure built for Delhi.",
@@ -233,7 +232,7 @@ const seoServicesDelhi: LocationServicePage = {
   icon: "Search",
   heroSubtitle:
     "Rank on Google's first page for Delhi-intent keywords. Technical SEO, local Map Pack dominance, and content engineered to convert NCR searchers.",
-  metaTitle: "SEO Services in Delhi | Top SEO Agency | SOCIAL VIENS",
+  metaTitle: "SEO Services in Delhi | SOCIAL VIENS",
   metaDescription:
     "Delhi's results-driven SEO agency. Technical SEO, local Map Pack, content & links. 350% avg ROI for Delhi NCR clients. Free SEO audit. Book today.",
   overviewTitle: "SEO that wins in Delhi's most contested search results",
@@ -376,8 +375,7 @@ const socialMediaDelhi: LocationServicePage = {
   icon: "Share2",
   heroSubtitle:
     "Build a Delhi-following that converts. Instagram, LinkedIn, and Facebook content engineered for the NCR consumer's attention span.",
-  metaTitle:
-    "Social Media Marketing in Delhi | Instagram & LinkedIn Agency | SOCIAL VIENS",
+  metaTitle: "Social Media Marketing in Delhi | SOCIAL VIENS",
   metaDescription:
     "Delhi's social media marketing agency. Content, community, and paid social engineered for NCR consumers. 500K+ followers generated. Free strategy session.",
   overviewTitle: "Social media that earns Delhi's attention — and keeps it",
@@ -520,8 +518,7 @@ const paidAdsDelhi: LocationServicePage = {
   icon: "Target",
   heroSubtitle:
     "Google, Meta, LinkedIn, and YouTube ad campaigns engineered for maximum ROAS. We run daily-traded Delhi NCR ad accounts across every major vertical.",
-  metaTitle:
-    "Paid Advertising Services in Delhi | Google & Meta Ads | SOCIAL VIENS",
+  metaTitle: "Google & Meta Ads Agency in Delhi | SOCIAL VIENS",
   metaDescription:
     "Delhi's performance marketing agency. Google Ads, Meta Ads, LinkedIn & YouTube. 3.2x avg ROAS. Free audit. Scale predictably.",
   overviewTitle: "Predictable revenue from Delhi's paid ad channels",
@@ -664,7 +661,7 @@ const brandingDelhi: LocationServicePage = {
   icon: "Palette",
   heroSubtitle:
     "Distinctive brand identities that command premium positioning in Delhi's saturated market. Strategy, identity, voice, and rollout.",
-  metaTitle: "Branding Services in Delhi | Brand Identity Agency | SOCIAL VIENS",
+  metaTitle: "Branding Agency in Delhi | SOCIAL VIENS",
   metaDescription:
     "Delhi's branding agency. Strategy, identity, voice, and brand rollout for premium positioning. 40+ Delhi brands launched. Free brand audit.",
   overviewTitle: "Brands built to stand out in Delhi's crowded market",
@@ -807,8 +804,7 @@ const googleBusinessProfileDelhi: LocationServicePage = {
   icon: "MapPinned",
   heroSubtitle:
     "Own the Map Pack in your Delhi neighbourhood. Optimisation, review acquisition, and geo-grid rank tracking that wins local customers.",
-  metaTitle:
-    "Google Business Profile in Delhi | Local SEO & GMB | SOCIAL VIENS",
+  metaTitle: "Google Business Profile SEO in Delhi | SOCIAL VIENS",
   metaDescription:
     "Delhi's Google Business Profile agency. Map Pack optimisation, review acquisition, geo-grid tracking. 44% of local searches convert. Free GBP audit.",
   overviewTitle: "Win the Delhi Map Pack — where local customers actually convert",
@@ -951,7 +947,7 @@ const appDevelopmentDelhi: LocationServicePage = {
   icon: "Smartphone",
   heroSubtitle:
     "Native & cross-platform apps engineered for Delhi's mobile-first consumers. iOS, Android, React Native, Flutter — built to scale.",
-  metaTitle: "App Development in Delhi | iOS, Android, React Native | SOCIAL VIENS",
+  metaTitle: "App Development in Delhi | SOCIAL VIENS",
   metaDescription:
     "Delhi's mobile app development agency. Native iOS, Android, React Native, Flutter. 30+ apps shipped. App Store + Play Store launches. Free scope call.",
   overviewTitle: "Apps built for Delhi's mobile-first consumers",
@@ -1098,10 +1094,9 @@ const websiteDevelopmentDwarka: LocationServicePage = {
   icon: "Globe",
   heroSubtitle:
     "Websites engineered for Dwarka's residential sub-city market — fast, mobile-first, and built to win Sector 6, 12, and 21 customers.",
-  metaTitle:
-    "Website Development in Dwarka | Custom Web Design | SOCIAL VIENS",
+  metaTitle: "Website Development in Dwarka | SOCIAL VIENS",
   metaDescription:
-    "Dwarka's local website development agency. Fast, mobile-first, SEO-ready sites built for sub-city consumers. 20+ Dwarka clients. Free scope call.",
+    "Build a fast, mobile-friendly website for your Dwarka business, with search-ready structure and clear paths for customer enquiries.",
   overviewTitle: "Websites built for Dwarka's residential sub-city market",
   overviewText:
     "Dwarka is one of Asia's largest residential sub-cities — over 1 million residents across 29 sectors, with a consumer base that is uniquely dense, neighbourhood-loyal, and mobile-first. A Dwarka business is not competing for all of Delhi; it is competing for the residents of Sectors 6, 7, 12, 21, and the surrounding blocks who search 'near me' before they ever step out. A generic template website built for 'all of India' will not win this market. Our website development in Dwarka is engineered specifically for this sub-city reality. We build websites that load in under two seconds on the 4G networks that dominate Dwarka mobile usage, that rank for sector-specific search terms ('grocery store Sector 12 Dwarka', 'CA Sector 6 Dwarka'), and that convert the high-intent Dwarka consumer who searches Google, checks Instagram, and messages on WhatsApp — often within the same 30-minute window. Every Dwarka site we ship starts with a discovery session focused on your sector-level service area: which blocks you serve, which Pin Codes, which competitor businesses in those sectors we need to differentiate against. We then design a visual identity that fits the premium expectations of Dwarka's predominantly middle-class and upper-middle-class residents — clean typography, generous white space, mobile-first layouts, and product photography that looks like it was shot in Dwarka, not stock-footage generic. Development is in-house: semantic HTML5, server-side rendering where it counts, structured data for LocalBusiness with sector-specific service areas, GA4 + Meta Pixel + WhatsApp Business integration, and a CMS workflow that lets Dwarka business owners update their own content without needing us. We integrate with the tools Dwarka businesses actually use: WhatsApp Business (essential — Dwarka consumers prefer WhatsApp over phone calls), Razorpay for local payments, Zoho CRM for lead tracking, and Google Business Profile sync so your website stays consistent with your Map Pack presence. Whether you are a Sector 6 boutique, a Sector 12 clinic, a Sector 21 restaurant, or a Dwarka Mor retailer — our sites are built to rank, load, and convert in this specific sub-city market. We have shipped 20+ production sites for Dwarka businesses across real estate, healthcare, retail, education, food delivery, and professional services. We know the local search behaviour, the WhatsApp-first communication preference, the festival-season traffic patterns, and the sector-specific competitor landscape. This is not website design for 'somewhere in Delhi'. This is website development for Dwarka.",
@@ -1242,7 +1237,7 @@ const seoServicesDwarka: LocationServicePage = {
   icon: "Search",
   heroSubtitle:
     "Rank on Google for Dwarka sector-level keywords. Local Map Pack dominance, content engineering, and citation building for sub-city SEO.",
-  metaTitle: "SEO Services in Dwarka | Local SEO Agency | SOCIAL VIENS",
+  metaTitle: "SEO Services in Dwarka | SOCIAL VIENS",
   metaDescription:
     "Dwarka's local SEO agency. Sector-level keyword targeting, Map Pack optimisation, content & citations. 3x avg organic traffic lift. Free audit.",
   overviewTitle: "SEO engineered for Dwarka's sector-level search behaviour",
@@ -1385,8 +1380,7 @@ const socialMediaDwarka: LocationServicePage = {
   icon: "Share2",
   heroSubtitle:
     "Build a Dwarka-following that walks in. Instagram and WhatsApp content engineered for sub-city consumers and sector-level footfall.",
-  metaTitle:
-    "Social Media Marketing in Dwarka | Instagram Agency | SOCIAL VIENS",
+  metaTitle: "Social Media Marketing in Dwarka | SOCIAL VIENS",
   metaDescription:
     "Dwarka's social media marketing agency. Content, community, and paid social for sub-city consumers. 200K+ Dwarka followers generated. Free strategy call.",
   overviewTitle: "Social media that drives Dwarka footfall — not just likes",
@@ -1529,8 +1523,7 @@ const paidAdsDwarka: LocationServicePage = {
   icon: "Target",
   heroSubtitle:
     "Google & Meta ads engineered for Dwarka sector-level targeting. Pin Code-level audience, 3.5x average ROAS.",
-  metaTitle:
-    "Paid Advertising in Dwarka | Google & Meta Ads | SOCIAL VIENS",
+  metaTitle: "Google & Meta Ads Agency in Dwarka | SOCIAL VIENS",
   metaDescription:
     "Dwarka's performance marketing agency. Google Ads, Meta Ads with Pin Code-level targeting. 3.5x avg ROAS. Free audit. Scale today.",
   overviewTitle: "Predictable revenue from Dwarka's paid ad channels",
@@ -1673,8 +1666,7 @@ const brandingDwarka: LocationServicePage = {
   icon: "Palette",
   heroSubtitle:
     "Distinctive brand identities built for Dwarka's residential sub-city market. Strategy, identity, voice, and rollout — locally relevant.",
-  metaTitle:
-    "Branding Services in Dwarka | Brand Identity Agency | SOCIAL VIENS",
+  metaTitle: "Branding Agency in Dwarka | SOCIAL VIENS",
   metaDescription:
     "Dwarka's branding agency. Strategy, identity, voice, and rollout for sub-city businesses. 15+ Dwarka brands launched. Free brand audit.",
   overviewTitle: "Brands built to stand out in Dwarka's tight community market",
@@ -1817,8 +1809,7 @@ const googleBusinessProfileDwarka: LocationServicePage = {
   icon: "MapPinned",
   heroSubtitle:
     "Own the Map Pack in your Dwarka sector. Sector-level optimisation, review flows, and geo-grid rank tracking for sub-city dominance.",
-  metaTitle:
-    "Google Business Profile in Dwarka | Local SEO & GMB | SOCIAL VIENS",
+  metaTitle: "Google Business Profile SEO in Dwarka | SOCIAL VIENS",
   metaDescription:
     "Dwarka's Google Business Profile agency. Sector-level Map Pack optimisation, review acquisition, geo-grid tracking. 44% local conversion. Free audit.",
   overviewTitle: "Win the Dwarka Map Pack — sector by sector",
@@ -1961,8 +1952,7 @@ const appDevelopmentDwarka: LocationServicePage = {
   icon: "Smartphone",
   heroSubtitle:
     "Native & cross-platform apps for Dwarka businesses. Built for sub-city consumers, sector-level features, and WhatsApp-first engagement.",
-  metaTitle:
-    "App Development in Dwarka | iOS, Android, React Native | SOCIAL VIENS",
+  metaTitle: "App Development in Dwarka | SOCIAL VIENS",
   metaDescription:
     "Dwarka's mobile app development agency. Native iOS, Android, React Native, Flutter. 12+ apps shipped for Dwarka businesses. Free scope call.",
   overviewTitle: "Apps built for Dwarka's mobile-first consumers",

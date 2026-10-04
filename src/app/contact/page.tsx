@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import PageShell from "@/components/layout/PageShell";
 import ContactClient from "./ContactClient";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/schema";
+import { withSeoOverride } from "@/lib/server-seo";
 
-export const metadata: Metadata = {
-  title: "Contact — Social Viens | Get Your Free Strategy Session",
+const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
+  title: "Contact SOCIAL VIENS | Digital Marketing",
   description:
-    "Get in touch with Social Viens. Free strategy session, response within 24 hours, 100% confidential. Call +91 81780 04800 or message us on WhatsApp.",
+    "Talk with SOCIAL VIENS about SEO, digital marketing or your business growth plans. Contact our team by phone or WhatsApp.",
   keywords: [
     "contact digital marketing agency",
     "free marketing consultation",
@@ -14,12 +16,17 @@ export const metadata: Metadata = {
     "WhatsApp marketing help",
   ],
   openGraph: {
+    images: ["/social-viens-logo.png"],
     title: "Contact — Social Viens",
     description:
       "Get in touch for a free strategy session. We respond within 24 hours.",
     type: "website",
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride("/contact", metadata);
+}
 
 export default function ContactPage() {
   const breadcrumbSchema = generateBreadcrumbSchema([

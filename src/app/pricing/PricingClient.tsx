@@ -255,7 +255,7 @@ export default function PricingClient() {
             transition={{ duration: 0.8 }}
             className="flex justify-center mb-6"
           >
-            <AnimatedHeading text1="Transparent" text2="Pricing" className="!mb-0" />
+            <AnimatedHeading as="h1" text1="Transparent" text2="Pricing" className="!mb-0" />
           </motion.div>
 
           <motion.p

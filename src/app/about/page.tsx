@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import AboutClient from "./AboutClient";
 import { SITE_URL, generateBreadcrumbSchema } from "@/lib/schema";
+import { withSeoOverride } from "@/lib/server-seo";
 
-export const metadata: Metadata = {
-  title: "About SOCIAL VIENS | Premium Digital Marketing Agency in India",
+const metadata: Metadata = {
+  alternates: { canonical: "/about" },
+  title: "About SOCIAL VIENS | Digital Growth Agency",
   description:
-    "Founded in 2021, SOCIAL VIENS is a premium digital marketing agency helping ambitious Indian businesses dominate search, generate qualified leads, and scale revenue through AI-powered growth strategies.",
+    "Meet the team behind SOCIAL VIENS and learn how we help Indian businesses grow through search, content and digital marketing.",
   keywords: [
     "about SOCIAL VIENS",
     "digital marketing agency India",
@@ -14,11 +16,16 @@ export const metadata: Metadata = {
     "SOCIAL VIENS story",
   ],
   openGraph: {
+    images: ["/social-viens-logo.png"],
     title: "About SOCIAL VIENS | Premium Digital Marketing Agency",
     description:
       "Our story, values, team, and milestones — meet the growth department behind 100+ successful brands.",
   },
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withSeoOverride("/about", metadata);
+}
 
 export default function AboutPage() {
   const breadcrumbSchema = generateBreadcrumbSchema([

@@ -30,6 +30,7 @@ export function generateMetadata({
     }
     const count = getPostCountForCategory(category);
     return {
+      alternates: { canonical: `/blog/category/${slug}` },
       title: `${category} Articles | SOCIAL VIENS Blog`,
       description: `${categoryDescriptions[category]} ${count} ${count === 1 ? "article" : "articles"} in this category.`,
       keywords: [
@@ -39,6 +40,7 @@ export function generateMetadata({
         category.toLowerCase() + " strategies",
       ],
       openGraph: {
+        images: ["/social-viens-logo.png"],
         title: `${category} Articles | SOCIAL VIENS Blog`,
         description: `${count} ${count === 1 ? "article" : "articles"} on ${category}. ${categoryDescriptions[category]}`,
         type: "website",

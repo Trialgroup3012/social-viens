@@ -36,10 +36,11 @@ export function generateMetadata({
       };
     }
     const title = `${service.title} | SOCIAL VIENS`;
-    const description = service.longDescription.slice(0, 160);
+    const description = service.shortDescription;
     return {
       title,
       description,
+      alternates: { canonical: `/services/${slug}` },
       keywords: [
         service.title.toLowerCase(),
         "digital marketing",
@@ -47,6 +48,7 @@ export function generateMetadata({
         ...service.benefits.map((b) => b.toLowerCase()),
       ],
       openGraph: {
+        images: service.coverImage ? [service.coverImage] : ["/social-viens-logo.png"],
         title,
         description,
         type: "website",
