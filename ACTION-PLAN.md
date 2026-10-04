@@ -1,12 +1,12 @@
 # Social Viens SEO Action Plan
 
-Based on the 2026-10-04 [on-page SEO audit](FULL-AUDIT-REPORT.md). These are recommendations, not changes already deployed.
+Based on the 2026-10-04 [on-page SEO audit](FULL-AUDIT-REPORT.md). Code updates shipped to GitHub `main` and Vercel in commit `86a6d9f`; this tracks what is complete and what still needs account-owner review.
 
 ## Implementation status
 
 Implemented in the local checkout: Article images now use the eight existing blog images; sitewide FAQ markup and unverified rating markup were removed; public routes have canonical and Open Graph image metadata; four main headings are H1s; service descriptions are complete; sitemap dates are omitted when unknown; and long page titles/descriptions were editorially shortened while retaining topic and intent. SEO Manager overrides for its 11 managed pages are now resolved in server metadata; save/reset invalidates the page so its HTML is regenerated. The SEO Manager now limits paths to those server-integrated pages.
 
-Still pending: owner-side Search Console URL Inspection and Core Web Vitals report review, plus post-deployment Rich Results/social-preview validation. Search Console sign-in was not available in the connected browser, and PageSpeed Insights returned no field data for this origin. The sitemap success visible in the previously supplied Search Console screenshot is historical, not a fresh account-side verification.
+Still pending: owner-side Search Console URL Inspection and Core Web Vitals report review, plus Rich Results/social-preview validation. Search Console sign-in was not available in the connected browser, and PageSpeed Insights returned no field data for this origin. The previously supplied screenshot showed sitemap success; a fresh public sitemap check now returns HTTP 200 with 61 URLs.
 
 ## Priority 1: Correct invalid structured data
 
@@ -26,8 +26,8 @@ Still pending: owner-side Search Console URL Inspection and Core Web Vitals repo
 8. Review long titles/descriptions for clarity and unique intent. The rendered page inventory was rechecked after edits; page titles are at most 65 characters and descriptions at most 170 characters. These are editorial guardrails, not Google ranking requirements.
 9. Use true per-page content modification dates in `src/app/sitemap.ts`, or omit dates where the site has no reliable value.
 10. Render Admin SEO Manager overrides through server-side Next.js metadata. Implemented for all 11 managed paths, with route revalidation after save/reset. Build-time database access was unavailable locally, so an override could not be seeded for a live HTML assertion before deploy.
-11. In Search Console, inspect representative URLs and compare submitted versus indexed pages. Owner sign-in is required; this connected browser was unauthenticated. PageSpeed Insights reported “No Data” for field experience, and its API quota was unavailable. Recheck Search Console mobile and desktop Core Web Vitals after deployment.
+11. In Search Console, inspect representative URLs and compare submitted versus indexed pages. Owner sign-in is required; this connected browser was unauthenticated. PageSpeed Insights reported “No Data” for field experience, and its API quota was unavailable. Recheck Search Console mobile and desktop Core Web Vitals.
 
 ## Release verification
 
-After deploying, request the live sitemap and representative pages, confirm all affected image URLs return 200, inspect HTML metadata/schema and headings, then use Search Console URL Inspection. Resubmitting a valid sitemap is optional; it does not guarantee indexing or rankings.
+Deployed from commit `86a6d9f`. Live checks on 2026-10-04: homepage, About, Services, Blog, Portfolio and Contact returned HTTP 200, each with one canonical, description and H1; `/sitemap.xml` returned HTTP 200 with 61 URLs. Search Console URL Inspection, CrUX Core Web Vitals and rich-result/social-preview tools still require owner access or additional data. Resubmitting a valid sitemap is optional; it does not guarantee indexing or rankings.
