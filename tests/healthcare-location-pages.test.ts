@@ -3,6 +3,8 @@
 import { expect, test } from "bun:test";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import {
   getHealthcareLocationBySlug,
   healthcareLocationPages,
@@ -39,6 +41,12 @@ test("defines the eight requested audience and location routes exactly once", ()
     (page) => `${page.audience}:${page.location}`,
   );
   expect(new Set(combinations).size).toBe(8);
+  expect(healthcareLocationPages.every((page) => page.heroImage === "/images/industries/medical.png")).toBe(true);
+  expect(
+    healthcareLocationPages.every((page) =>
+      existsSync(join(process.cwd(), "public", page.heroImage.slice(1))),
+    ),
+  ).toBe(true);
 });
 
 test("provides unique canonical-ready metadata and distinct copy for every page", () => {

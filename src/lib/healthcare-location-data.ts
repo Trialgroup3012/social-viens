@@ -26,6 +26,7 @@ export interface HealthcareLocationPage {
   audience: HealthcareAudience;
   location: HealthcareLocation;
   locationLabel: string;
+  heroImage: string;
   title: string;
   h1: string;
   targetKeyword: string;
@@ -199,6 +200,7 @@ function makePage(input: {
     audience: input.audience,
     location: input.location,
     locationLabel: area.label,
+    heroImage: "/images/industries/medical.png",
     title,
     h1: `${isDoctor ? "Digital Marketing for Doctors" : "Hospital Digital Marketing"} ${locationSuffix}`,
     targetKeyword: input.keyword,

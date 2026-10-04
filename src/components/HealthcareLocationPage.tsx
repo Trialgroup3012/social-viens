@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Building2, MapPin, MessageCircle, Stethoscope } from "lucide-react";
 import PageShell from "@/components/layout/PageShell";
 import {
@@ -83,17 +84,29 @@ export function HealthcareLocationPageView({
               </Link>
             </div>
           </div>
-          <div className="border-l border-amber-300/50 py-2 pl-6 md:pl-8">
-            <p className="flex items-center gap-2 text-sm font-semibold uppercase text-amber-300">
-              <MapPin aria-hidden="true" className="h-4 w-4" />
-              Service area
-            </p>
-            <p className="mt-3 text-2xl font-semibold">
-              {page.location === "delhi" ? "Across Delhi" : `${page.locationLabel}, Delhi`}
-            </p>
-            <p className="mt-3 max-w-md leading-7 text-white/70">
-              Planning and content are scoped to the locations your practice or hospital actually serves.
-            </p>
+          <div className="space-y-6">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-md border border-white/10">
+              <Image
+                src={page.heroImage}
+                alt="Illustrative doctor-patient conversation for a healthcare practice"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 38vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="border-l border-amber-300/50 py-2 pl-6 md:pl-8">
+              <p className="flex items-center gap-2 text-sm font-semibold uppercase text-amber-300">
+                <MapPin aria-hidden="true" className="h-4 w-4" />
+                Service area
+              </p>
+              <p className="mt-3 text-2xl font-semibold">
+                {page.location === "delhi" ? "Across Delhi" : `${page.locationLabel}, Delhi`}
+              </p>
+              <p className="mt-3 max-w-md leading-7 text-white/70">
+                Planning and content are scoped to the locations your practice or hospital actually serves.
+              </p>
+            </div>
           </div>
         </div>
       </section>
